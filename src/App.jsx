@@ -2,7 +2,7 @@ import './App.css';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import LandingPage from '@/pages/landing';
-import Onboarding from '@/pages/Onboarding';
+import Onboarding from '@/pages/onboarding';
 import JobPage from '@/pages/job';
 import JobListing from '@/pages/job-listing';
 import MyJobs from '@/pages/my-jobs';
