@@ -12,7 +12,7 @@ function LandingPage() {
 		<>
 			<main className="flex flex-col  gap-10 sm:gap-20 py-10 sm:py-20 px-20">
 				<section className="text-center">
-					<h1 className="flex flex-col justify-center items-center gradient-title text-4xl font-bold sm:text-6xl lg:text-8xl tracking-tighter py-4">
+					<h1 className="flex flex-col justify-center items-center gradient-title text-2xl font-bold sm:text-5xl lg:text-6xl tracking-tighter py-4">
 						Find your dream job {''}
 						<span className="flex items-center gap-2 sm:gap-6">
 							and get {''}

@@ -27,7 +27,7 @@ function Header() {
 		<>
 			<nav className=" py-4 flex justify-between items-center">
 				<Link>
-					<img src="logo-dark.png" alt="logo" className="h-20 w-auto" />
+					<img src="/logo-dark.png" alt="logo" className="h-10 sm:h-14 lg:h-20 mr-4" />
 				</Link>
 				<div className="flex gap-7">
 					<SignedOut>
@@ -47,7 +47,7 @@ function Header() {
 						<UserButton
 							appearance={{
 								elements: {
-									avatarBox: 'w-16 h-16 mr-10 ', // Outer wrapper
+									avatarBox: 'w-16 h-16 mr-10 ring-0', // Outer wrapper
 									avatarImage: 'w-16 h-16',
 								},
 							}}

@@ -25,7 +25,7 @@ function SavedJobs() {
 
 	return (
 		<div>
-			<h1 className="gradient-title font-bold text-4xl sm:text-5xl text-center pb-8"> Saved Jobs</h1>
+			<h1 className="gradient-title font-bold text-3xl sm:text-5xl text-center pb-8"> Saved Jobs</h1>
 			{loadingSavedJobs === false && (
 				<div
 					className={`mt-8 ${

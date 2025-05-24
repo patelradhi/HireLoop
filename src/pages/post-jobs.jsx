@@ -79,7 +79,7 @@ const PostJob = () => {
 
 	return (
 		<div>
-			<h1 className="gradient-title font-bold text-5xl sm:text-7xl text-center pb-8">Post a Job</h1>
+			<h1 className="gradient-title font-bold text-3xl sm:text-5xl text-center pb-8">Post a Job</h1>
 			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 pb-0">
 				<Input placeholder="Job Title" {...register('title')} />
 				{errors.title && <p className="text-red-500">{errors.title.message}</p>}
