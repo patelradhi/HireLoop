@@ -11,6 +11,7 @@ import { deleteJob } from '@/api/apijobs';
 const JobCard = ({ job, isMyJob = false, isMySavedJob = false, onJobSaved = () => {} }) => {
 	const { user } = useUser();
 	const [saved, setSaved] = React.useState(isMySavedJob);
+	const [isVisible, setIsVisible] = React.useState(true);
 
 	// for saving job
 	const { loading: loadingSavedJob, data: savedJob, fn: fnSavedJob } = useFetch(savedJobs, { alreadySaved: saved });
@@ -30,21 +31,17 @@ const JobCard = ({ job, isMyJob = false, isMySavedJob = false, onJobSaved = () =
 
 	const handleDeleteJob = async () => {
 		await fnDeleteJob();
+
+		setIsVisible(false);
 		onJobSaved();
 	};
+	// Don’t render if not visible
+	if (!isVisible) return null;
 
 	return (
 		<Card className="flex flex-col gap-1 w-[370px] mx-auto ">
 			<CardHeader className="flex justify-between">
 				<CardTitle className="flex justify-between font-bold pb-4">{job.title}</CardTitle>
-				{isMyJob && (
-					<Trash2Icon
-						fill="red"
-						size={20}
-						className="text-red-300 cursor-pointer"
-						onClick={handleDeleteJob}
-					/>
-				)}
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 flex-1">
 				<div className="flex justify-between">
@@ -65,8 +62,14 @@ const JobCard = ({ job, isMyJob = false, isMySavedJob = false, onJobSaved = () =
 						More Details
 					</Button>
 				</Link>
-
-				{!isMyJob && (
+				{isMyJob ? (
+					<Trash2Icon
+						fill="red"
+						size={20}
+						className="text-red-300 cursor-pointer"
+						onClick={handleDeleteJob}
+					/>
+				) : (
 					<Button variant="outline" className="w-15" onClick={handelSavedJob} disabled={loadingSavedJob}>
 						{saved ? <Heart size={20} fill="red" stroke="red" /> : <Heart size={20} />}
 					</Button>

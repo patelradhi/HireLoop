@@ -22,9 +22,9 @@ function ApllicationCard({ application, isCandidate = false }) {
 	};
 
 	return (
-		<Card className="m-10">
+		<Card className="m-8 p-2 rounded-md shadow-md text-sm">
 			<CardHeader>
-				<CardTitle className="flex justify-between font-bold pt-2">
+				<CardTitle className="flex justify-between items-center text-base font-semibold pt-2">
 					{isCandidate
 						? `${application?.job?.title} at ${application?.job?.company?.name}`
 						: application?.name}
@@ -37,14 +37,14 @@ function ApllicationCard({ application, isCandidate = false }) {
 			</CardHeader>
 			<CardContent className="flex flex-col gap-4 flex-1">
 				<div className="flex flex-col md:flex-row justify-between">
-					<div className="flex gap-2 items-center">
+					<div className="flex gap-1 items-center">
 						<BriefcaseBusiness size={15} /> {application?.experience} years of experience
 					</div>
-					<div className="flex gap-2 items-center">
+					<div className="flex gap-1 items-center">
 						<School size={15} />
 						{application?.education}
 					</div>
-					<div className="flex gap-2 items-center">
+					<div className="flex gap-1 items-center">
 						<Boxes size={15} /> Skills: {application?.skills}
 					</div>
 				</div>

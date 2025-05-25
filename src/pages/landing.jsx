@@ -16,7 +16,7 @@ function LandingPage() {
 						Find your dream job {''}
 						<span className="flex items-center gap-2 sm:gap-6">
 							and get {''}
-							<img src="logo-dark.png" alt="hirrd logo" className="h-14 sm:h-24 lg:h-32" />
+							<img src="/logo-dark.png" alt="hirrd logo" className="h-14 sm:h-24 lg:h-32" />
 						</span>
 					</h1>
 					<p className="text-gray-300 text-xs sm:mt-4 sm:text-xl">
