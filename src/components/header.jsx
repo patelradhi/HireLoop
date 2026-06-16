@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from './ui/button';
 import { SignedIn, SignedOut, SignInButton, UserButton, SignIn } from '@clerk/clerk-react';
 import { PenBox, BriefcaseBusiness, Heart } from 'lucide-react';
+import Logo from './ui/logo';
 import { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 
@@ -25,30 +26,31 @@ function Header() {
 	};
 	return (
 		<>
-			<nav className=" py-4 flex justify-between items-center">
-				<Link>
-					<img src="/logo.png" alt="logo" className="h-10 sm:h-14 lg:h-20 mr-4" />
-				</Link>
-				<div className="flex gap-7">
+			<header className="sticky top-0 z-40 w-full border-b border-white/40 bg-white/55 backdrop-blur-md dark:border-white/10 dark:bg-white/5">
+				<nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+					<Link to="/" className="flex items-center">
+						<Logo className="text-2xl sm:text-3xl" />
+					</Link>
+					<div className="flex items-center gap-4">
 					<SignedOut>
-						<Button className="mr-15 mt-2" variant="outline" onClick={() => setShowSignIn(true)}>
+						<Button variant="blue" onClick={() => setShowSignIn(true)}>
 							Login
 						</Button>
 					</SignedOut>
 					<SignedIn>
 						{user?.unsafeMetadata?.role === 'recruiter' && (
 							<Link to="/post-jobs">
-								<Button variant="red" className="rounded-full ">
-									<PenBox size={20} />
-									post a job
+								<Button variant="red">
+									<PenBox size={18} />
+									Post a job
 								</Button>
 							</Link>
 						)}
 						<UserButton
 							appearance={{
 								elements: {
-									avatarBox: 'w-16 h-16 mr-10 ring-0', // Outer wrapper
-									avatarImage: 'w-16 h-16',
+									avatarBox: 'w-10 h-10 ring-0', // Outer wrapper
+									avatarImage: 'w-10 h-10',
 								},
 							}}
 						>
@@ -69,9 +71,10 @@ function Header() {
 					</SignedIn>
 				</div>
 			</nav>
+			</header>
 			{showSignIn && (
 				<div
-					className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+					className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm"
 					onClick={handelOverlayClick}
 				>
 					<SignIn signUpForceRedirectUrl="/onboarding" fallbackRedirectUrl="/onboarding" />

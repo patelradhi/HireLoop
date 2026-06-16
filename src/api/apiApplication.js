@@ -31,14 +31,14 @@ export async function applyToJob(token, _, jobData) {
 	return data;
 }
 
-//update application status
-export async function updateApplicationStatus(token, { job_id }, status) {
+//update application status (targets one specific application by its unique id)
+export async function updateApplicationStatus(token, { application_id }, status) {
 	const supabase = await supabaseClient(token);
 
 	const { data, error } = await supabase
 		.from('applications')
 		.update({ status: status })
-		.eq('job_id', job_id)
+		.eq('id', application_id)
 		.select();
 
 	if (error) {

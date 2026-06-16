@@ -23,11 +23,11 @@ const CreatedApplications = () => {
 	}, []);
 
 	if (loadingApplications) {
-		return <BarLoader className="mb-4" width={'100%'} color="#36d7b7" />;
+		return <BarLoader className="mb-4" width={'100%'} color="#6d5ef8" />;
 	}
 	[];
 	return (
-		<div className="flex flex-col  gap-2 ">
+		<div className="mt-8 flex flex-col gap-4">
 			{Array.isArray(applications) && applications.length > 0 ? (
 				applications.map((application) => (
 					<ApplicationCard key={application.id} application={application} isCandidate={true} />
@@ -35,12 +35,12 @@ const CreatedApplications = () => {
 			) : (
 				<div className="flex flex-col items-center justify-center h-[60vh] text-center px-4">
 					<img src="/jobs/save-job.png" alt="No jobs found" className="w-42 h-48 mx-auto mb-6" />
-					<p className="text-gray-400 mb-6 max-w-md">
+					<p className="text-muted-foreground mb-6 max-w-md">
 						You haven’t applied to any jobs yet. Start exploring opportunities and apply to kickstart your
 						journey!{' '}
 					</p>
 					<Link to="/jobs">
-						<button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition">
+						<button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-2.5 rounded-full shadow-sm shadow-primary/20 transition">
 							Explore Jobs
 						</button>
 					</Link>

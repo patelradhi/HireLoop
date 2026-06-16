@@ -3,6 +3,7 @@ import AddCompanyDrawer from '@/components/ui/add-company-drawer';
 
 import { addNewJob } from '@/api/apijobs';
 import { Button } from '@/components/ui/button';
+import BackButton from '@/components/ui/back-button';
 
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -70,7 +71,7 @@ const PostJob = () => {
 	}, [isLoaded]);
 
 	if (!isLoaded || loadingCompanies) {
-		return <BarLoader className="mb-4" width={'100%'} color="#36d7b7" />;
+		return <BarLoader className="mb-4" width={'100%'} color="#6d5ef8" />;
 	}
 
 	if (user?.unsafeMetadata?.role !== 'recruiter') {
@@ -79,8 +80,12 @@ const PostJob = () => {
 
 	return (
 		<div>
-			<h1 className="gradient-title font-bold text-3xl sm:text-5xl text-center pb-8">Post a Job</h1>
-			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 pb-0">
+			<BackButton to="/jobs" label="Back to jobs" className="mt-6" />
+			<h1 className="gradient-title font-bold text-4xl sm:text-5xl text-center tracking-tighter pb-8">Post a Job</h1>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="glass mx-auto flex max-w-3xl flex-col gap-4 rounded-[2rem] p-6 sm:p-10"
+			>
 				<Input placeholder="Job Title" {...register('title')} />
 				{errors.title && <p className="text-red-500">{errors.title.message}</p>}
 
@@ -147,14 +152,14 @@ const PostJob = () => {
 							value={field.value}
 							onChange={field.onChange}
 							height={200}
-							data-color-mode="dark" // ✅ enables dark mode
+							data-color-mode="light"
 						/>
 					)}
 				/>
 				{errors.requirements && <p className="text-red-500">{errors.requirements.message}</p>}
 				{errors.errorCreateJob && <p className="text-red-500">{errors?.errorCreateJob?.message}</p>}
 				{errorCreateJob?.message && <p className="text-red-500">{errorCreateJob?.message}</p>}
-				{loadingCreateJob && <BarLoader width={'100%'} color="#36d7b7" />}
+				{loadingCreateJob && <BarLoader width={'100%'} color="#6d5ef8" />}
 				<Button type="submit" variant="blue" size="lg" className="mt-2">
 					Submit
 				</Button>

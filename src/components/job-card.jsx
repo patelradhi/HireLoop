@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { Heart, MapPinIcon, Trash2Icon } from 'lucide-react';
+import { Badge } from './ui/badge';
+import { Heart, MapPinIcon, Trash2Icon, BriefcaseBusiness, BadgeDollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import useFetch from '@/hooks/use-fetch';
@@ -38,40 +39,70 @@ const JobCard = ({ job, isMyJob = false, isMySavedJob = false, onJobSaved = () =
 	// Don’t render if not visible
 	if (!isVisible) return null;
 
-	return (
-		<Card className="flex flex-col gap-1 w-[370px] mx-auto ">
-			<CardHeader className="flex justify-between">
-				<CardTitle className="flex justify-between font-bold pb-4">{job.title}</CardTitle>
-			</CardHeader>
-			<CardContent className="flex flex-col gap-4 flex-1">
-				<div className="flex justify-between">
-					{job.company && <img src={job.company.logo_url} alt="company logo" className="h-6" />}
+	const blurb = job.description?.substring(0, job.description.indexOf('.')) || 'No description available.';
 
-					<div className="flex gap-2 items-center">
-						<MapPinIcon size={15} className="text-gray-300 mr-2" />
-						{job.location}
-					</div>
+	return (
+		<Card className="group flex h-full flex-col gap-4 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:bg-white/70 hover:shadow-2xl hover:shadow-violet-500/15 dark:hover:bg-white/10">
+			<CardHeader className="gap-3">
+				<div className="flex items-center justify-between gap-3">
+					{job.company?.logo_url ? (
+						<img src={job.company.logo_url} alt={job.company?.name || 'company'} className="h-7 w-auto object-contain" />
+					) : (
+						<span className="text-sm font-medium text-muted-foreground">{job.company?.name}</span>
+					)}
+					{job.isOpen === false ? (
+						<Badge variant="destructive">Closed</Badge>
+					) : (
+						<Badge variant="success">Actively hiring</Badge>
+					)}
 				</div>
-				<hr />
-				{job.description?.substring(0, job.description.indexOf('.')) || 'No description available.'}
+				<CardTitle className="text-lg font-bold leading-snug tracking-tight transition-colors group-hover:text-primary">
+					{job.title}
+				</CardTitle>
+			</CardHeader>
+
+			<CardContent className="flex flex-1 flex-col gap-4">
+				<div className="flex flex-wrap gap-2">
+					<Badge variant="outline">
+						<MapPinIcon /> {job.location}
+					</Badge>
+					{job.salary && (
+						<Badge variant="violet">
+							<BadgeDollarSign /> {job.salary}
+						</Badge>
+					)}
+					{job.equity && (
+						<Badge variant="violet">
+							<BriefcaseBusiness /> {job.equity} equity
+						</Badge>
+					)}
+				</div>
+				<p className="text-sm leading-relaxed text-muted-foreground">{blurb}</p>
 			</CardContent>
 
-			<CardFooter className="flex justify-between ">
-				<Link to={`/job/${job.id}`}>
-					<Button variant="secondary" className="w-full">
+			<CardFooter className="mt-auto flex items-center gap-3">
+				<Link to={`/job/${job.id}`} className="flex-1">
+					<Button variant="blue" className="w-full">
 						More Details
 					</Button>
 				</Link>
 				{isMyJob ? (
-					<Trash2Icon
-						fill="red"
-						size={20}
-						className="text-red-300 cursor-pointer"
+					<Button
+						variant="outline"
+						size="icon"
+						className="text-destructive hover:bg-destructive/10 hover:text-destructive"
 						onClick={handleDeleteJob}
-					/>
+						disabled={loadingDeleteJob}
+					>
+						<Trash2Icon size={18} />
+					</Button>
 				) : (
-					<Button variant="outline" className="w-15" onClick={handelSavedJob} disabled={loadingSavedJob}>
-						{saved ? <Heart size={20} fill="red" stroke="red" /> : <Heart size={20} />}
+					<Button variant="outline" size="icon" onClick={handelSavedJob} disabled={loadingSavedJob}>
+						{saved ? (
+							<Heart size={18} fill="currentColor" className="text-destructive" />
+						) : (
+							<Heart size={18} />
+						)}
 					</Button>
 				)}
 			</CardFooter>
